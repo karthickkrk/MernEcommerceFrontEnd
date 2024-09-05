@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Base colors
+#8bd8bd --- Green, #243665 --- Blue*/
+a.active hr {
+  display: block;
+}
