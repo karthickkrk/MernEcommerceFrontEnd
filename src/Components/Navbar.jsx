@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { assets } from "../assets/assets";
 import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
+  const [visible, setVisible] = useState(false)
   return (
     <div className="flex items-center justify-between py-5 font-medium">
       <img src={assets.logo} alt="Logo" className="h-10" />
@@ -57,13 +58,39 @@ const Navbar = () => {
           </p>
         </Link>
         <img
+          onClick={()=>setVisible(true)}
           src={assets.menu_icon}
           alt="mobile menu icon"
           className="w-5 cursor-pointer sm:hidden"
         />
       </div>
+      {/* Side Menu for small screens */}
+      <div className={`absolute top-0 right-0 bottom-0 overflow-hidden bg-white transition-all ${visible ? 'w-full' : 'w-0'}`}>
+        <div className="flex flex-col  text-[#243665]">
+          <div onClick={()=>setVisible(false)} className="flex items-center gap-4 p-3 cursor-pointer">
+            <img className="h-4 rotate-180" src={assets.dropdown_icon} alt="back icon" />
+            <p className="text-sm">Back</p>
+          </div>
+          <div className="flex flex-col gap-4 px-3 py-6">
+            <NavLink onClick={()=> setVisible(false)}  to="/" className="text-sm">
+              Home
+            </NavLink>
+            <NavLink onClick={()=> setVisible(false)} to="/collection" className="text-sm">
+              Collection
+            </NavLink>
+            <NavLink onClick={()=> setVisible(false)} to="/about" className="text-sm">
+              About
+            </NavLink>
+            <NavLink onClick={()=> setVisible(false)} to="/contact" className="text-sm">
+              Contact
+            </NavLink>
+          </div>
+        </div>
+      </div>
     </div>
   );
+          
+ 
 };
 
 export default Navbar;
